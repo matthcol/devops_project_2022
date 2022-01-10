@@ -1,0 +1,38 @@
+// To work with this pipeline:
+// - install plugin NodeJs
+// - configure tool nodejs with at least nodejs10
+//		* you can add Angular in global packages : @angular/cli@10.0
+// - use/adapt following pipeline declaring params
+// 		* FRONT_GIT_URL : git url of front sources
+//		* FRONT_GIT_BRANCH : git branch of front sources
+//		* BACKEND_BASE_URL : base url of the backend to be connected with the front
+//		* REPOSITORY : where to depose web site
+
+pipeline {
+    agent any
+
+    tools {
+        nodejs "nodejs16"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                git url:"$FRONT_GIT_URL",
+                    branch:"$FRONT_GIT_BRANCH"
+
+                sh 'echo backend will be set to $BACKEND_BASE_URL'
+				// change backend in prod environment file
+                sh 'sed -i "s#BACKEND_BASE_URL#$BACKEND_BASE_URL#" src/environments/environment.prod.ts'
+				
+                sh "npm ci"
+                sh "ng build --prod"
+            }
+        }
+        stage('Depose'){
+            steps {
+                sh 'cp -R dist/* $REPOSITORY'
+            }
+        }
+    }
+}
