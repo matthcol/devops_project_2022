@@ -1,9 +1,5 @@
 # Timeline development Springboot Api Rest
 
-front F branch devf1 : 
-	
-	- list movies + form to add new movie
-
 api M branch main (tests OK) : 
 
 	- GET /api/movies
