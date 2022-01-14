@@ -1,6 +1,6 @@
 # Timeline development Java EE/Spring Api Rest
 
-NB: ne pas oublier de mettre le contexte de l'appli devant route suivante, exemple http://serveurapi:8080/movieapi/api/movies/1
+NB: ne pas oublier de mettre le contexte de l'appli devant les routes suivantes. Exemple http://serveurapi:8080/movieapi/api/movies/1
 
 api M branch main (tests OK) : 
 
